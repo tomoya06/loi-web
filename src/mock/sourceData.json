@@ -1,0 +1,75 @@
+{
+    "code": 200,
+    "status": "OK",
+    "data": {
+        "id": "5e6d0db41a04dcb04e2118f9",
+        "word": "盎",
+        "pinyinList": [
+            {
+                "title": "盎",
+                "rawId": "①",
+                "pinyin": [
+                    "ong3"
+                ],
+                "define": "古代的一種盆，腹大口小。盛，充溢。<雷>形容深。<雷>深洞。",
+                "score": 0
+            },
+            {
+                "title": "盎",
+                "rawId": "②",
+                "pinyin": [
+                    "ong5"
+                ],
+                "define": "<雷>泥坑窑炉。<雷>坑埋。",
+                "score": 0
+            }
+        ],
+        "examples": [
+            {
+                "word": "深深盎盎",
+                "pinyinList": [
+                    [
+                        "cim2",
+                        "cim2",
+                        "ong3",
+                        "ong3"
+                    ]
+                ],
+                "define": "很深很深。",
+                "jointPinyinList": [
+                    "cim cim ong ong"
+                ],
+                "score": 0
+            },
+            {
+                "word": "老鼠盎",
+                "pinyinList": [
+                    [
+                        "lau6",
+                        "du4",
+                        "ong3"
+                    ]
+                ],
+                "define": "老鼠洞。",
+                "jointPinyinList": [
+                    "lau du ong"
+                ],
+                "score": 0
+            },
+            {
+                "word": "拍盎",
+                "pinyinList": [
+                    [
+                        "pa5",
+                        "ong5"
+                    ]
+                ],
+                "define": "打土窑，一種休闲娱乐性野炊活动，通常的玩法是在泥地上挖个浅坑，上面用乾泥块垒个小窑，用柴火在小窑裡面把泥块烧热，然後用热的泥块把食物焗熟。",
+                "jointPinyinList": [
+                    "pa ong"
+                ],
+                "score": 0
+            }
+        ]
+    }
+}
