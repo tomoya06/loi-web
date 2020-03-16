@@ -4,34 +4,52 @@
   </div>
 </template>
 <script>
-import * as sourceData from '@/mock/sourceData.json';
+// import * as sourceData from '@/mock/sourceData.json';
+import { getWordById } from '@/api/dicAPI';
 
 import WordRenderer from './WordRenderer.vue';
 
 export default {
   data() {
     return {
-      targetId: '',
+      targetId: [],
       source: null,
       sourceLoading: false,
     };
   },
   created() {
-    this.parsedParam();
     this.fetchSourceData();
   },
   methods: {
-    parsedParam() {
-      const curUrl = new URL(window.location.href);
-      this.targetId = curUrl.searchParams.get('id');
-    },
-    async fetchSourceData() {
+    fetchSourceData() {
+      const queryId = this.$route.query.id;
+      if (!queryId) {
+        console.log('no queryid');
+        return;
+      }
+      this.targetId = queryId.split(/[-@]/);
+      this.targetId.push(queryId.replace(/[^-@]/g, ''));
       this.sourceLoading = true;
-      await this.$nextTick();
-      setTimeout(() => {
-        this.source = sourceData.data;
-        this.sourceLoading = false;
-      }, 0);
+      this.$nextTick().then(() => {
+        getWordById({
+          id: this.targetId[0],
+        }).then((response) => {
+          const { data } = response.data;
+          this.source = data.main;
+        }).catch((error) => {
+          console.log(error.getMessage);
+        }).finally(() => {
+          this.sourceLoading = false;
+        });
+      });
+    },
+  },
+  computed: {
+    targetIdType() {
+      if (this.targetId.length === 2) {
+        return 'WORD';
+      }
+      return this.targetId[2] === '-' ? 'PINYIN' : 'EXAMPLE';
     },
   },
   components: {
