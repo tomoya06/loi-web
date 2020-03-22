@@ -3,9 +3,10 @@
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title>
-          <div>
-            <span class="display-2">{{ source.word }}</span>
-          </div>
+          <span class="display-2 pr-2">{{ source.word }}</span>
+          <v-chip outlined class="px-1" color="primary" x-small>
+            字
+          </v-chip>
         </v-list-item-title>
         <v-sheet class="py-2"></v-sheet>
         <v-list-item-subtitle>

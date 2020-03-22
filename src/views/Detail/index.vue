@@ -1,10 +1,6 @@
 <template>
   <div class="view-container">
-    <word-renderer
-      :source="source"
-      :type="targetIdType"
-      :targetId="targetId"
-    ></word-renderer>
+    <word-renderer :source="source" :type="targetIdType" :targetId="targetId"></word-renderer>
     <v-card v-if="sourceLoading">
       <div class="text-center py-4">
         <v-progress-linear indeterminate />
@@ -30,7 +26,7 @@ export default {
     fetchSourceData() {
       const queryId = this.$route.query.id;
       if (!queryId) {
-        console.log('no queryid');
+        this.$toast('No Query ID');
         return;
       }
       this.targetId = queryId.split(/[-@]/);
@@ -45,8 +41,8 @@ export default {
             const { data } = response.data;
             this.source = data;
           })
-          .catch((error) => {
-            console.log(error.getMessage);
+          .catch(() => {
+            this.$toast('error');
           })
           .finally(() => {
             this.sourceLoading = false;

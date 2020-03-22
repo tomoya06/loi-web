@@ -2,7 +2,7 @@
   <div v-if="!!source">
     <v-row justify="center" dense>
       <template v-if="type === 'EXAMPLE'">
-        <v-col cols="12" sm="6" md="4">
+        <v-col cols="12" :sm="colSm" :md="colMd">
           <target-example :example="targetExample"></target-example>
           <div class="text-center my-2" v-ripple="{ center: true }">
             <span class="mx-2 subtitle-2 grey--text">收录于『{{ source.word }}』字</span>
@@ -10,17 +10,22 @@
           </div>
         </v-col>
       </template>
+    </v-row>
+    <v-row justify="center" dense>
       <template>
-        <v-col cols="12" sm="6" md="4">
+        <v-col cols="12" :sm="colSm" :md="colMd">
           <item-header :source="source"></item-header>
         </v-col>
-        <v-col cols="12" sm="6" md="4">
+        <v-col cols="12" :sm="colSm" :md="colMd">
           <item-pinyin :pinyins="source.pinyinList"></item-pinyin>
         </v-col>
-        <v-col cols="12" sm="6" md="4" v-if="displayExamples">
-          <item-example v-if="source.examples" :examples="source.examples"></item-example>
+        <v-col cols="12" :sm="colSm" :md="colMd">
+          <item-example
+            v-if="displayExamples && source.examples"
+            :examples="source.examples"
+          ></item-example>
         </v-col>
-        <v-col cols="12" sm="6" md="4">
+        <v-col cols="12" :sm="colSm" :md="colMd">
           <item-feedback :targetId="source.id"></item-feedback>
         </v-col>
       </template>

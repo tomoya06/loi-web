@@ -18,7 +18,7 @@
             v-model="form.feedbackMsg"
             ref="feedbackTxt"
           ></v-textarea>
-          <v-text-field label="联系方式" v-model="form.contact"></v-text-field>
+          <v-text-field label="联系方式（可选）" v-model="form.contact"></v-text-field>
           <div class="text-center" id="btn-panel">
             <v-btn class="mx-2" @click="closeFeedback">取消</v-btn>
             <v-btn class="mx-2" color="success" :disabled="isSubmitDisabled"
@@ -46,7 +46,7 @@ export default {
   },
   computed: {
     isSubmitDisabled() {
-      return !this.feedbackMsg;
+      return !this.form.feedbackMsg;
     },
   },
   methods: {

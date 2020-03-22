@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar app color="black" dark fixed>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
-      <v-toolbar-title>雷州话字典</v-toolbar-title>
+      <v-toolbar-title>雷州话字典<span class="subtitle-2 pl-1">ALPHA</span></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>mdi-heart</v-icon>

@@ -1,54 +1,56 @@
 <template>
-  <v-row dense>
-    <v-col cols="9">
-      <v-card color="red">
-        <v-card-title>OK</v-card-title>
-        <v-card-subtitle>OK</v-card-subtitle>
-        <v-card-actions>
-          <v-icon class="mr-1">mdi-chevron-right</v-icon>
-        </v-card-actions>
-      </v-card>
-    </v-col>
-    <v-col cols="3">
-      <v-card color="red">
-        <v-card-title>OK</v-card-title>
-        <v-card-subtitle>OK</v-card-subtitle>
-        <v-card-actions>
-          <v-icon class="mr-1">mdi-chevron-right</v-icon>
-        </v-card-actions>
-      </v-card>
-    </v-col>
-    <v-col cols="6">
-      <v-card color="red">
-        <v-card-title>OK</v-card-title>
-        <v-card-subtitle>OK</v-card-subtitle>
-        <v-card-actions>
-          <v-icon class="mr-1">mdi-chevron-right</v-icon>
-        </v-card-actions>
-      </v-card>
-    </v-col>
-    <v-col cols="6">
-      <v-card color="red">
-        <v-card-title>OK</v-card-title>
-        <v-card-subtitle>OK</v-card-subtitle>
-        <v-card-actions>
-          <v-icon class="mr-1">mdi-chevron-right</v-icon>
-        </v-card-actions>
-      </v-card>
-    </v-col>
-  </v-row>
+  <div class="recommend-container">
+    <v-sheet class="mt-4 mb-2">
+      <div class="title">
+        <span class="title">推荐速览</span>
+      </div>
+    </v-sheet>
+    <v-row dense>
+      <v-col v-for="(recItem, idx) in recommendList" :key="idx" :cols="recItem.col">
+        <v-card :color="recItem.color" :to="{ name: 'Detail', query: { id: recItem.targetId } }">
+          <v-card-title>{{ recItem.title }}</v-card-title>
+          <v-card-subtitle class="text-no-wrap text-truncate">
+            <span>{{ recItem.subtitle }}</span>
+          </v-card-subtitle>
+          <v-card-actions class="px-4 pt-4 text-no-wrap text-truncate">
+            <span class="subtitle-2">{{ recItem.action }}</span>
+            <v-spacer></v-spacer>
+            <v-icon dense>mdi-chevron-right</v-icon>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 <script>
+import { getRecommend } from '@/api/dicAPI';
+
 export default {
   data() {
-    return {};
+    return {
+      recommendList: [],
+      fetchLoading: false,
+      fetchError: false,
+    };
   },
   created() {
     this.fetchData();
   },
   methods: {
     fetchData() {
-
+      this.fetchLoading = true;
+      getRecommend()
+        .then((response) => {
+          const { data } = response.data;
+          this.recommendList = data;
+        })
+        .catch(() => {
+          this.$toast('Get Recommend Error');
+          this.fetchError = true;
+        })
+        .finally(() => {
+          this.fetchLoading = false;
+        });
     },
   },
 };

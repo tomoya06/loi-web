@@ -8,6 +8,9 @@ import '@/assets/css/main.css';
 
 Vue.config.productionTip = false;
 
+Vue.prototype.colSm = 8;
+Vue.prototype.colMd = 6;
+
 new Vue({
   router,
   vuetify,

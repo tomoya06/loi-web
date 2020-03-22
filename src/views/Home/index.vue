@@ -2,7 +2,7 @@
   <div class="view-container">
     <div class="header">
       <v-row justify="center">
-        <v-col cols="12" sm="6" md="4">
+        <v-col cols="12" :sm="colSm" :md="colMd">
           <v-text-field
             label="输入你想搜索的字词"
             outlined
@@ -17,7 +17,7 @@
     </div>
     <div class="search-result" v-if="!isSearchIdle">
       <v-row justify="center">
-        <v-col cols="12" sm="6" md="4" class="pt-0">
+        <v-col cols="12" :sm="colSm" :md="colMd" class="pt-0">
           <v-card>
             <div class="text-center my-2" v-if="isSearchTyping">
               <v-progress-linear indeterminate v-if="searchLoading" />
@@ -49,11 +49,17 @@
     </div>
     <div class="recommand-result" v-else>
       <v-row justify="center">
-        <v-col cols="12" sm="6" md="4" class="pt-0">
+        <v-col cols="12" :sm="colSm" :md="colMd" class="pt-0">
           <recommand-grid />
         </v-col>
       </v-row>
     </div>
+    <v-footer fixed class="caption">
+      <v-spacer></v-spacer>
+      <span>NFRD Software &amp; Zieng ft. Namwaa Culture</span>
+      <span class="px-1">&copy;</span>
+      <span>{{ new Date().getFullYear() }}</span>
+    </v-footer>
   </div>
 </template>
 <script>

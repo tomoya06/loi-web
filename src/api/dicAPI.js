@@ -8,4 +8,4 @@ export const general = () => Instance.get('/loilang/general');
 
 export const getWordById = ({ id }) => Instance.get(`/loilang/id/${id}`);
 
-export const getRecommand = () => Instance.get('/loilang/recommand');
+export const getRecommend = () => Instance.get('/loilang/rec');
