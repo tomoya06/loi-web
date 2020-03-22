@@ -23,7 +23,7 @@ export default {
   methods: {
     pinyinTitleFilter(pinyinItem) {
       const allPinyin = pinyinItem.pinyin.join(' / ');
-      const parsedDefine = pinyinItem.define.replace('#', '<br>* ');
+      const parsedDefine = pinyinItem.define.replace(/#/g, '<br>* ');
       return `
       <span class='text--primary pl-2'>${allPinyin}</span>
       <span class='pl-1'>${parsedDefine}</span>

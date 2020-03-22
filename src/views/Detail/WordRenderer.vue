@@ -1,58 +1,61 @@
 <template>
-  <div>
-    <v-row justify="center" v-if="source !== null">
-      <v-col cols="12" sm="6" md="4">
-        <v-card>
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title>
-                <div>
-                  <span class="display-2">{{ source.word }}</span>
-                </div>
-              </v-list-item-title>
-              <v-sheet class="py-2"></v-sheet>
-              <v-list-item-subtitle>
-                <span>共有{{ pinyinCount }}个读音，{{ defCount }}种释义。</span>
-              </v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </v-card>
-      </v-col>
-      <v-col cols="12" sm="6" md="4">
-        <item-pinyin :pinyins="source.pinyinList"></item-pinyin>
-      </v-col>
-      <v-col cols="12" sm="6" md="4">
-        <item-example v-if="source.examples" :examples="source.examples"></item-example>
-      </v-col>
-      <v-col cols="12" sm="6" md="4">
-        <item-feedback :targetId="source.id"></item-feedback>
-      </v-col>
+  <div v-if="!!source">
+    <v-row justify="center" dense>
+      <template v-if="type === 'EXAMPLE'">
+        <v-col cols="12" sm="6" md="4">
+          <target-example :example="targetExample"></target-example>
+          <div class="text-center my-2" v-ripple="{ center: true }">
+            <span class="mx-2 subtitle-2 grey--text">收录于『{{ source.word }}』字</span>
+            <v-icon color="blue-grey lighten-4" dense>mdi-chevron-down</v-icon>
+          </div>
+        </v-col>
+      </template>
+      <template>
+        <v-col cols="12" sm="6" md="4">
+          <item-header :source="source"></item-header>
+        </v-col>
+        <v-col cols="12" sm="6" md="4">
+          <item-pinyin :pinyins="source.pinyinList"></item-pinyin>
+        </v-col>
+        <v-col cols="12" sm="6" md="4" v-if="displayExamples">
+          <item-example v-if="source.examples" :examples="source.examples"></item-example>
+        </v-col>
+        <v-col cols="12" sm="6" md="4">
+          <item-feedback :targetId="source.id"></item-feedback>
+        </v-col>
+      </template>
     </v-row>
   </div>
 </template>
 <script>
-import _ from 'lodash';
-
+import ItemHeader from './ItemHeader.vue';
 import ItemPinyin from './ItemPinyin.vue';
 import ItemExample from './ItemExample.vue';
 import ItemFeedback from './ItemFeedback.vue';
+import TargetExample from './TargetExample.vue';
 
 export default {
   props: {
     source: Object,
-  },
-  computed: {
-    defCount() {
-      return this.source.pinyinList.length;
-    },
-    pinyinCount() {
-      return _.flatten(this.source.pinyinList.map((p) => p.pinyin)).length;
-    },
+    type: String,
+    targetId: Array,
   },
   components: {
     ItemPinyin,
     ItemExample,
     ItemFeedback,
+    ItemHeader,
+    TargetExample,
+  },
+  computed: {
+    targetExample() {
+      return this.source && this.source.examples
+        ? this.source.examples.find((example) => `${example.nid}` === this.targetId[1])
+        : {};
+    },
+    displayExamples() {
+      return this.type !== 'EXAMPLE';
+    },
   },
 };
 </script>

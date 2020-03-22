@@ -16,6 +16,9 @@
         <div class="caption text-truncate">{{ item.define | defineFilter }}</div>
       </v-list-item-subtitle>
     </v-list-item-content>
+    <v-list-item-action>
+      <v-icon :size="24">mdi-chevron-right</v-icon>
+    </v-list-item-action>
   </v-list-item>
 </template>
 <script>

@@ -7,3 +7,5 @@ export const search = ({ query, dizzy }) => Instance.get('/loilang/search', {
 export const general = () => Instance.get('/loilang/general');
 
 export const getWordById = ({ id }) => Instance.get(`/loilang/id/${id}`);
+
+export const getRecommand = () => Instance.get('/loilang/recommand');

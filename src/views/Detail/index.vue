@@ -1,6 +1,15 @@
 <template>
   <div class="view-container">
-    <word-renderer :source="source"></word-renderer>
+    <word-renderer
+      :source="source"
+      :type="targetIdType"
+      :targetId="targetId"
+    ></word-renderer>
+    <v-card v-if="sourceLoading">
+      <div class="text-center py-4">
+        <v-progress-linear indeterminate />
+      </div>
+    </v-card>
   </div>
 </template>
 <script>
@@ -17,9 +26,6 @@ export default {
       sourceLoading: false,
     };
   },
-  created() {
-    this.fetchSourceData();
-  },
   methods: {
     fetchSourceData() {
       const queryId = this.$route.query.id;
@@ -30,17 +36,21 @@ export default {
       this.targetId = queryId.split(/[-@]/);
       this.targetId.push(queryId.replace(/[^-@]/g, ''));
       this.sourceLoading = true;
+      this.source = null;
       this.$nextTick().then(() => {
         getWordById({
           id: this.targetId[0],
-        }).then((response) => {
-          const { data } = response.data;
-          this.source = data.main;
-        }).catch((error) => {
-          console.log(error.getMessage);
-        }).finally(() => {
-          this.sourceLoading = false;
-        });
+        })
+          .then((response) => {
+            const { data } = response.data;
+            this.source = data;
+          })
+          .catch((error) => {
+            console.log(error.getMessage);
+          })
+          .finally(() => {
+            this.sourceLoading = false;
+          });
       });
     },
   },
@@ -52,8 +62,19 @@ export default {
       return this.targetId[2] === '-' ? 'PINYIN' : 'EXAMPLE';
     },
   },
+  watch: {
+    $router() {
+      this.fetchSourceData();
+    },
+  },
   components: {
     WordRenderer,
+  },
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      vm.fetchSourceData();
+      next();
+    });
   },
 };
 </script>

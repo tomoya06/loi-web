@@ -12,7 +12,9 @@
     <v-content>
       <v-container class="fill-height align-start" fluid>
         <transition name="slide">
-          <router-view></router-view>
+          <keep-alive>
+            <router-view></router-view>
+          </keep-alive>
         </transition>
       </v-container>
     </v-content>
