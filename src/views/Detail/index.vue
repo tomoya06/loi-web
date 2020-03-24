@@ -1,11 +1,12 @@
 <template>
   <div class="view-container">
-    <word-renderer :source="source" :type="targetIdType" :targetId="targetId"></word-renderer>
-    <v-card v-if="sourceLoading">
-      <div class="text-center py-4">
-        <v-progress-linear indeterminate />
-      </div>
-    </v-card>
+    <v-skeleton-loader
+      :loading="sourceLoading"
+      type="list-item-three-line"
+      transition="scroll-y-transition"
+    >
+      <word-renderer :source="source" :type="targetIdType" :targetId="targetId"></word-renderer>
+    </v-skeleton-loader>
   </div>
 </template>
 <script>
