@@ -2,7 +2,7 @@
   <div class="recommend-container">
     <v-sheet class="mt-4 mb-2">
       <div class="title">
-        <span class="title">推荐速览</span>
+        <span class="title">字典推荐</span>
       </div>
     </v-sheet>
     <v-skeleton-loader
@@ -36,7 +36,6 @@ export default {
     return {
       recommendList: [],
       fetchLoading: false,
-      fetchError: false,
     };
   },
   created() {
@@ -52,7 +51,6 @@ export default {
         })
         .catch(() => {
           this.$toast('Get Recommend Error');
-          this.fetchError = true;
         })
         .finally(() => {
           this.fetchLoading = false;

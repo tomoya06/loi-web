@@ -48,6 +48,13 @@
         </v-col>
       </v-row>
     </div>
+    <div class="general-result" v-show="isSearchIdle">
+      <v-row justify="center">
+        <v-col cols="12" :sm="colSm" :md="colMd" class="pt-0">
+          <general-grid />
+        </v-col>
+      </v-row>
+    </div>
     <div class="recommand-result" v-show="isSearchIdle">
       <v-row justify="center">
         <v-col cols="12" :sm="colSm" :md="colMd" class="pt-0">
@@ -72,6 +79,7 @@ import SearchedExampleItem from './SearchedExampleItem.vue';
 import SearchedPinyinItem from './SearchedPinyinItem.vue';
 import SearchedWordItem from './SearchedWordItem.vue';
 import RecommandGrid from './RecommandGrid.vue';
+import GeneralGrid from './GeneralGrid.vue';
 
 export default {
   data() {
@@ -122,14 +130,8 @@ export default {
     },
   },
   computed: {
-    isSearchNoResult() {
-      return this.form.query.length > 0 && !this.searchLoading && this.searchedResult.length === 0;
-    },
     isSearchIdle() {
-      return this.form.query.length === 0;
-    },
-    isSearchTyping() {
-      return this.form.query.length > 0 && this.searchedResult.length === 0;
+      return !this.form.query || this.form.query.length === 0;
     },
     handleInputQuery() {
       return _.debounce(this.handleSubmitQuery, 500);
@@ -150,6 +152,7 @@ export default {
     SearchedPinyinItem,
     SearchedWordItem,
     RecommandGrid,
+    GeneralGrid,
   },
 };
 </script>
