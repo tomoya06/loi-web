@@ -26,7 +26,7 @@
           ></item-example>
         </v-col>
         <v-col cols="12" :sm="colSm" :md="colMd">
-          <item-feedback :targetId="source.id"></item-feedback>
+          <item-feedback :rawTargetId="rawTargetId"></item-feedback>
         </v-col>
       </template>
     </v-row>
@@ -44,6 +44,7 @@ export default {
     source: Object,
     type: String,
     targetId: Array,
+    rawTargetId: String,
   },
   components: {
     ItemPinyin,

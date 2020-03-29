@@ -5,7 +5,12 @@
       type="list-item-three-line"
       transition="scroll-y-transition"
     >
-      <word-renderer :source="source" :type="targetIdType" :targetId="targetId"></word-renderer>
+      <word-renderer
+        :source="source"
+        :type="targetIdType"
+        :targetId="targetId"
+        :rawTargetId="queryId"
+      ></word-renderer>
     </v-skeleton-loader>
   </div>
 </template>
@@ -19,6 +24,7 @@ export default {
   data() {
     return {
       targetId: [],
+      queryId: '',
       source: null,
       sourceLoading: false,
     };
@@ -26,6 +32,7 @@ export default {
   methods: {
     fetchSourceData() {
       const queryId = this.$route.query.id;
+      this.queryId = queryId;
       if (!queryId) {
         this.$toast('No Query ID');
         return;
