@@ -6,7 +6,7 @@
     <v-skeleton-loader
       type="list-item-three-line"
       :loading="fetchLoading"
-      transition="scroll-y-transition"
+      transition="fade-transition"
     >
       <v-row dense>
         <v-col :cols="6">
