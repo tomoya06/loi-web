@@ -131,7 +131,6 @@ export default {
           this.$refs.form.reset();
         })
         .catch((e) => {
-          console.log(e);
           if (e.response && e.response.status === 403) {
             this.$toast('验证码错误');
             return;
